@@ -1,0 +1,9 @@
+.appBar .css-hip9hq-MuiPaper-root-MuiAppBar-root {
+  background-color: #0d0d0d;
+}
+
+.appBar
+  .css-hip9hq-MuiPaper-root-MuiAppBar-root
+  .css-1juivf6-MuiTypography-root {
+  font-weight: bold;
+}

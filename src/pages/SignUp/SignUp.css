@@ -1,0 +1,18 @@
+.signUp {
+  margin: 9%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.signUp .carDispo .carConten .formContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.signUp .carDispo .carConten .formContainer .divBotones {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
