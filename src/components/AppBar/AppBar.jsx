@@ -12,9 +12,10 @@ export default function ButtonAppBar() {
     <Box sx={{ flexGrow: 1 }} className="appBar">
       <AppBar position="static">
         <Toolbar>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Foro Estudiantil
+          <Typography variant="h6" component="span" sx={{ flexGrow: 1 }}>
+            AnimusChan
           </Typography>
+
           <IconButton
             size="large"
             edge="start"

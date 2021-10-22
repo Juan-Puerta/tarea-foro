@@ -1,9 +1,10 @@
 import React from "react";
 import routes from "./config/routes";
+import { AppContextWrapper } from "./store/AppContext";
 import "./App.css";
 
 function App() {
-  return <div className="App">{routes}</div>;
+  return <AppContextWrapper>{routes}</AppContextWrapper>;
 }
 
 export default App;

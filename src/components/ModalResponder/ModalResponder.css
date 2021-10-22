@@ -1,0 +1,13 @@
+.boxModal {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.modalBotones .css-e53awj-MuiStack-root {
+  justify-content: flex-end;
+}
+
+.css-1u3bzj6-MuiFormControl-root-MuiTextField-root {
+  width: 100%;
+}

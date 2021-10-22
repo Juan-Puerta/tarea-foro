@@ -5,6 +5,10 @@
   align-items: center;
 }
 
+.cabeseraSignUp {
+  text-align: center;
+}
+
 .signUp .carDispo .carConten .formContainer {
   display: flex;
   flex-direction: column;

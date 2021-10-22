@@ -12,8 +12,10 @@ const SignUp = () => {
     <div className="signUp">
       <Card className="carDispo" sx={{ minWidth: 275 }}>
         <CardContent className="carConten">
-          <div>Foro estudiantil</div>
-          <div>Registrarse</div>
+          <div className="cabeseraSignUp">
+            <div>Foro estudiantil</div>
+            <div>Registrarse</div>
+          </div>
           <hr />
           <div className="formContainer">
             <div>Nombre completo</div>

@@ -9,16 +9,13 @@ const MensajeList = () => {
   return (
     <div className="mensajeList">
       {state.mensajes.map((mensaje) => (
-        <div>
-          <Mensaje
-            key={mensaje.id}
-            titulo={mensaje.titulo}
-            usuario={mensaje.hechoPor}
-            fecha={mensaje.fecha}
-            textMensaje={mensaje.texto}
-          />
-          <hr />
-        </div>
+        <Mensaje
+          key={mensaje.id}
+          titulo={mensaje.titulo}
+          usuario={mensaje.hechoPor}
+          fecha={mensaje.fecha}
+          textMensaje={mensaje.texto}
+        />
       ))}
     </div>
   );

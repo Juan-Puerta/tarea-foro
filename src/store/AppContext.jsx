@@ -29,8 +29,21 @@ export const AppContextWrapper = (props) => {
   ];
 
   const [mensajes, setMensajes] = useState(mensajesArray);
+  const [modalResponder, setMoldalResponder] = React.useState(false);
 
-  const state = { mensajes, setMensajes };
+  const openModalResponder = () => {
+    console.log(modalResponder);
+    setMoldalResponder(true);
+  };
+  const closeModalResponder = () => setMoldalResponder(false);
+
+  const state = {
+    mensajes,
+    setMensajes,
+    modalResponder,
+    openModalResponder,
+    closeModalResponder,
+  };
 
   return (
     <AppContext.Provider value={state} displayName="AppContext">
