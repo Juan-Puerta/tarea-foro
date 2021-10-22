@@ -4,11 +4,24 @@
 
 .card .cardAction .cardContent .infoMensaje {
   display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
+  flex-direction: column;
+  text-align: left;
+}
+
+.card
+  .cardAction
+  .cardContent
+  .infoMensaje
+  .infoMensajeUser
+  .css-h93ljk-MuiTypography-root {
+  font-size: 0.8rem;
 }
 
 .mensaje .css-r40f8v-MuiTypography-root {
   text-align: start;
+}
+
+.mensaje .card .css-1t6e9jv-MuiCardActions-root {
+  justify-content: flex-end;
+  gap: 10px;
 }

@@ -4,6 +4,8 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import CardActions from "@mui/material/CardActions";
+import Divider from "@mui/material/Divider";
+import Stack from "@mui/material/Stack";
 import { CardActionArea } from "@mui/material";
 import "./Mensaje.css";
 
@@ -14,14 +16,22 @@ const Mensaje = ({ titulo, usuario, fecha, textMensaje }) => {
         <CardActionArea className="cardAction">
           <CardContent className="cardContent">
             <div className="infoMensaje">
+              <div className="infoMensajeUser">
+                <Stack
+                  direction="row"
+                  divider={<Divider orientation="vertical" flexItem />}
+                  spacing={2}
+                >
+                  <Typography gutterBottom variant="h5" component="div">
+                    {usuario}
+                  </Typography>
+                  <Typography gutterBottom variant="h5" component="div">
+                    {fecha}
+                  </Typography>
+                </Stack>
+              </div>
               <Typography gutterBottom variant="h5" component="div">
                 {titulo}
-              </Typography>
-              <Typography gutterBottom variant="h5" component="div">
-                {usuario}
-              </Typography>
-              <Typography gutterBottom variant="h5" component="div">
-                {fecha}
               </Typography>
             </div>
             <Typography variant="body2" color="text.secondary">
@@ -29,9 +39,9 @@ const Mensaje = ({ titulo, usuario, fecha, textMensaje }) => {
             </Typography>
           </CardContent>
         </CardActionArea>
-        <CardActions>
-          <Button size="small">Editar</Button>
-          <Button size="small">Eliminar</Button>
+        <CardActions className="botonesContenedor">
+          <Button variant="contained">Editar</Button>
+          <Button variant="contained">Eliminar</Button>
         </CardActions>
       </Card>
     </div>

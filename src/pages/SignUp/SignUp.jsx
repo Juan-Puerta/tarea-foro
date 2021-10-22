@@ -3,6 +3,8 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
+import Divider from "@mui/material/Divider";
+import Stack from "@mui/material/Stack";
 import "./SignUp.css";
 
 const SignUp = () => {
@@ -38,12 +40,14 @@ const SignUp = () => {
               variant="filled"
             />
             <div className="divBotones">
-              <div>
+              <Stack
+                direction="row"
+                divider={<Divider orientation="vertical" flexItem />}
+                spacing={2}
+              >
                 <Button variant="contained">Ingresar</Button>
-              </div>
-              <div>
                 <Button variant="contained">Cancelar</Button>
-              </div>
+              </Stack>
             </div>
           </div>
         </CardContent>
