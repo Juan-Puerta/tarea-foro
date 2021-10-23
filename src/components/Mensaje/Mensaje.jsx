@@ -7,11 +7,11 @@ import CardActions from "@mui/material/CardActions";
 import Divider from "@mui/material/Divider";
 import Stack from "@mui/material/Stack";
 import { CardActionArea } from "@mui/material";
-import ModalResponder from "../ModalResponder/ModalResponder";
 import AppContext from "../../store/AppContext";
+import AcordeonRespuestas from "../AcordeonRespuestas/AcordeonRespuestas";
 import "./Mensaje.css";
 
-const Mensaje = ({ titulo, usuario, fecha, textMensaje }) => {
+const Mensaje = ({ titulo, usuario, fecha, textMensaje, respuestas }) => {
   const state = useContext(AppContext);
 
   const openModalResponder = () => {
@@ -21,6 +21,13 @@ const Mensaje = ({ titulo, usuario, fecha, textMensaje }) => {
   return (
     <div className="mensaje">
       <Card className="card" sx={{ maxWidth: 345 }}>
+        <CardActions className="botonesContenedor">
+          <Button onClick={openModalResponder} variant="contained">
+            Responder
+          </Button>
+          <Button variant="contained">Editar</Button>
+          <Button variant="contained">Eliminar</Button>
+        </CardActions>
         <CardActionArea className="cardAction">
           <CardContent className="cardContent">
             <div className="infoMensaje">
@@ -47,15 +54,8 @@ const Mensaje = ({ titulo, usuario, fecha, textMensaje }) => {
             </Typography>
           </CardContent>
         </CardActionArea>
-        <CardActions className="botonesContenedor">
-          <Button onClick={openModalResponder} variant="contained">
-            Responder
-          </Button>
-          <Button variant="contained">Editar</Button>
-          <Button variant="contained">Eliminar</Button>
-        </CardActions>
+        <AcordeonRespuestas respuestas={respuestas}></AcordeonRespuestas>
       </Card>
-      <ModalResponder></ModalResponder>
       <hr />
     </div>
   );

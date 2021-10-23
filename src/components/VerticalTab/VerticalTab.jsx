@@ -6,7 +6,6 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Foro from "../../pages/Foro/Foro";
 import Buscar from "../../pages/Buscar/Buscar";
-import Configuracion from "../../pages/Configuracion/Configuracion";
 import "./VerticalTab.css";
 
 function TabPanel(props) {
@@ -60,7 +59,6 @@ export default function BasicTabs() {
           >
             <Tab label="Discutir" {...a11yProps(0)} />
             <Tab label="Buscar" {...a11yProps(1)} />
-            <Tab label="Configurar" {...a11yProps(2)} />
           </Tabs>
         </Box>
         <TabPanel value={value} index={0}>
@@ -68,9 +66,6 @@ export default function BasicTabs() {
         </TabPanel>
         <TabPanel value={value} index={1}>
           <Buscar></Buscar>
-        </TabPanel>
-        <TabPanel value={value} index={2}>
-          <Configuracion></Configuracion>
         </TabPanel>
       </Box>
     </div>

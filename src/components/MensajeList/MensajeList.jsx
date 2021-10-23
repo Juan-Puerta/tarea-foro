@@ -15,6 +15,7 @@ const MensajeList = () => {
           usuario={mensaje.hechoPor}
           fecha={mensaje.fecha}
           textMensaje={mensaje.texto}
+          respuestas={mensaje.respuestas}
         />
       ))}
     </div>
