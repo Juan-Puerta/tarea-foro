@@ -1,14 +1,11 @@
 import React, { useState } from "react";
-import firebase from "../config/firebase";
-import { getFirestore, doc, setDoc, deleteDoc } from "firebase/firestore";
+//import firebase from "../config/firebase";
+//import { getFirestore, doc, setDoc, deleteDoc } from "firebase/firestore";
 
 const AppContext = React.createContext();
 
 export const AppContextWrapper = (props) => {
-
-  const firebaseDb = getFirestore(firebase);
-  const [messages, setMessage] = useState([]);
-  /* const mensajesArray = [
+  const mensajesArray = [
     {
       id: "1m",
       idUser: "1",
@@ -38,7 +35,6 @@ export const AppContextWrapper = (props) => {
         { idRespuesta: "3r2", idMensaje: "2m", textoR: "Estás enfermo amigo" },
       ],
     },
-
     {
       id: "3m",
       idUser: "2",
@@ -59,22 +55,35 @@ export const AppContextWrapper = (props) => {
         },
       ],
     },
-  ]; */
+  ];
 
-  const setTaskMessage = (id, newMessage) => {
+  //const firebaseDb = getFirestore(firebase);
+  const [messages, setMessages] = useState(mensajesArray);
+  const [modalResponder, setMoldalResponder] = React.useState(false);
+
+  const setTaskMessageAndTitle = (id, newTitulo, newMensaje) => {
     const messagesUpdated = messages.map((message) => {
       if (message.id === id) {
+        return {
+          ...message,
+          titulo: newTitulo,
+          texto: newMensaje,
+        };
+        /** 
         const foroWebRef = doc(firebaseDb, "ForoWeb", id);
         setDoc(foroWebRef, { text: newMessage }, { merge: true });
         return { ...message, text: newMessage };
+        */
       }
       return message;
     });
-    setMessage(messagesUpdated);
+    setMessages(messagesUpdated);
   };
 
-  //const [mensajes, setMensajes] = useState(mensajesArray);
-  const [modalResponder, setMoldalResponder] = React.useState(false);
+  const deleteMessage = (id) => {
+    const newMessages = messages.filter((mensaje) => mensaje.id !== id);
+    setMessages(newMessages);
+  };
 
   const openModalResponder = () => {
     setMoldalResponder(true);
@@ -83,8 +92,9 @@ export const AppContextWrapper = (props) => {
 
   const state = {
     messages,
-    //setMensajes,
-    setTaskMessage,
+    setMessages,
+    setTaskMessageAndTitle,
+    deleteMessage,
     modalResponder,
     openModalResponder,
     closeModalResponder,

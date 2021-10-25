@@ -29,3 +29,19 @@
 .card .cardAction {
   background-color: #e9e9e9;
 }
+
+.cardContent .infoMensaje .infoMensajeUser .css-h93ljk-MuiTypography-root {
+  font-size: 0.8rem;
+}
+
+.cardContent {
+  background-color: #e9e9e9;
+}
+
+.cardContent .css-1u3bzj6-MuiFormControl-root-MuiTextField-root {
+  width: 100%;
+}
+
+.cardContent .css-cio0x1-MuiInputBase-root-MuiFilledInput-root {
+  margin-bottom: 10px;
+}
