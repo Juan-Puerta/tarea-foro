@@ -1,9 +1,14 @@
 import React, { useState } from "react";
+import firebase from "../config/firebase";
+import { getFirestore, doc, setDoc, deleteDoc } from "firebase/firestore";
 
 const AppContext = React.createContext();
 
 export const AppContextWrapper = (props) => {
-  const mensajesArray = [
+
+  const firebaseDb = getFirestore(firebase);
+  const [messages, setMessage] = useState([]);
+  /* const mensajesArray = [
     {
       id: "1m",
       idUser: "1",
@@ -54,9 +59,21 @@ export const AppContextWrapper = (props) => {
         },
       ],
     },
-  ];
+  ]; */
 
-  const [mensajes, setMensajes] = useState(mensajesArray);
+  const setTaskMessage = (id, newMessage) => {
+    const messagesUpdated = messages.map((message) => {
+      if (message.id === id) {
+        const foroWebRef = doc(firebaseDb, "ForoWeb", id);
+        setDoc(foroWebRef, { text: newMessage }, { merge: true });
+        return { ...message, text: newMessage };
+      }
+      return message;
+    });
+    setMessage(messagesUpdated);
+  };
+
+  //const [mensajes, setMensajes] = useState(mensajesArray);
   const [modalResponder, setMoldalResponder] = React.useState(false);
 
   const openModalResponder = () => {
@@ -65,8 +82,9 @@ export const AppContextWrapper = (props) => {
   const closeModalResponder = () => setMoldalResponder(false);
 
   const state = {
-    mensajes,
-    setMensajes,
+    messages,
+    //setMensajes,
+    setTaskMessage,
     modalResponder,
     openModalResponder,
     closeModalResponder,

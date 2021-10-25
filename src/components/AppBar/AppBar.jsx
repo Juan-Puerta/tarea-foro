@@ -13,7 +13,7 @@ export default function ButtonAppBar() {
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" component="span" sx={{ flexGrow: 1 }}>
-            AnimusChan
+            AnonymousChan
           </Typography>
 
           <IconButton

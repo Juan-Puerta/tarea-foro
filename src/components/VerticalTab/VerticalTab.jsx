@@ -59,6 +59,7 @@ export default function BasicTabs() {
           >
             <Tab label="Discutir" {...a11yProps(0)} />
             <Tab label="Buscar" {...a11yProps(1)} />
+            <Tab label="OtraPestaña" {...a11yProps(1)} />
           </Tabs>
         </Box>
         <TabPanel value={value} index={0}>
@@ -67,6 +68,7 @@ export default function BasicTabs() {
         <TabPanel value={value} index={1}>
           <Buscar></Buscar>
         </TabPanel>
+        
       </Box>
     </div>
   );

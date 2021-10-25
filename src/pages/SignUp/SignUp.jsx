@@ -6,8 +6,11 @@ import TextField from "@mui/material/TextField";
 import Divider from "@mui/material/Divider";
 import Stack from "@mui/material/Stack";
 import "./SignUp.css";
+import firebase from "../../config/firebase";
 
 const SignUp = () => {
+
+  
   return (
     <div className="signUp">
       <Card className="carDispo" sx={{ minWidth: 275 }}>
