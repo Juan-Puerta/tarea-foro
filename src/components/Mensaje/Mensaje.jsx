@@ -9,6 +9,7 @@ import Stack from "@mui/material/Stack";
 import { CardActionArea } from "@mui/material";
 import AppContext from "../../store/AppContext";
 import AcordeonRespuestas from "../AcordeonRespuestas/AcordeonRespuestas";
+import ModalRespuesta from "../ModalRespuesta/ModalRespuesta";
 import EditIcon from "@mui/icons-material/Edit";
 import SaveIcon from "@mui/icons-material/Save";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
@@ -22,10 +23,19 @@ const Mensaje = ({ id, titulo, usuario, fecha, textMensaje, respuestas }) => {
   const [isUpdating, setIsUpdating] = useState(false);
   const [title, setTitle] = useState(titulo);
   const [textoMensa, setTextoMensa] = useState(textMensaje);
+  const [openModalRespuesta, setOpenModalRespuesta] = React.useState(false);
 
   const cambiarTituloAndTexto = () => {
     setIsUpdating(false);
     state.setTaskMessageAndTitle(id, title, textMensaje);
+  };
+
+  const abrirModalRespuestas = () => {
+    setOpenModalRespuesta(true);
+  };
+
+  const cerrarModalRespuesta = () => {
+    setOpenModalRespuesta(false);
   };
 
   /** 
@@ -50,7 +60,9 @@ const Mensaje = ({ id, titulo, usuario, fecha, textMensaje, respuestas }) => {
     <div className="mensaje">
       <Card className="card" sx={{ maxWidth: 345 }}>
         <CardActions className="botonesContenedor">
-          <Button variant="contained">Responder</Button>
+          <Button variant="contained" onClick={abrirModalRespuestas}>
+            Responder
+          </Button>
           {isUpdating ? (
             <IconButton
               color="primary"
@@ -151,6 +163,11 @@ const Mensaje = ({ id, titulo, usuario, fecha, textMensaje, respuestas }) => {
         <AcordeonRespuestas respuestas={respuestas}></AcordeonRespuestas>
       </Card>
       <hr />
+      <ModalRespuesta
+        id={id}
+        visible={openModalRespuesta}
+        cerrarModal={cerrarModalRespuesta}
+      />
     </div>
   );
 };

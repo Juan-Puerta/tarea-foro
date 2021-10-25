@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 //import firebase from "../config/firebase";
 //import { getFirestore, doc, setDoc, deleteDoc } from "firebase/firestore";
 
@@ -59,7 +60,8 @@ export const AppContextWrapper = (props) => {
 
   //const firebaseDb = getFirestore(firebase);
   const [messages, setMessages] = useState(mensajesArray);
-  const [modalResponder, setMoldalResponder] = React.useState(false);
+  //const [modalResponder, setMoldalResponder] = React.useState(false);
+  //const [openModalRespuesta, setOpenModalRespuesta] = React.useState(false);
 
   const setTaskMessageAndTitle = (id, newTitulo, newMensaje) => {
     const messagesUpdated = messages.map((message) => {
@@ -85,19 +87,36 @@ export const AppContextWrapper = (props) => {
     setMessages(newMessages);
   };
 
+  const addAnswer = (id, textoRespuesta) => {
+    const nuevaRespuesta = {
+      idRespuesta: uuidv4(),
+      idMensaje: id,
+      textoR: textoRespuesta,
+    };
+    const updateAnswer = messages.map((mensaje) => {
+      if (mensaje.id === id) {
+        mensaje.respuestas.push(nuevaRespuesta);
+      }
+      return mensaje;
+    });
+
+    setMessages(updateAnswer);
+  };
+
+  /**
+
   const openModalResponder = () => {
     setMoldalResponder(true);
   };
   const closeModalResponder = () => setMoldalResponder(false);
+   */
 
   const state = {
     messages,
     setMessages,
     setTaskMessageAndTitle,
     deleteMessage,
-    modalResponder,
-    openModalResponder,
-    closeModalResponder,
+    addAnswer,
   };
 
   return (
