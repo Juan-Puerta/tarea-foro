@@ -6,7 +6,6 @@ import { v4 as uuidv4 } from "uuid";
 
 const AppContext = React.createContext();
 
-
 export const AppContextWrapper = (props) => {
   const mensajesArray = [
     {
@@ -60,10 +59,7 @@ export const AppContextWrapper = (props) => {
     },
   ];
 
-  //const firebaseDb = getFirestore(firebase);
   const [messages, setMessages] = useState(mensajesArray);
-  //const [modalResponder, setMoldalResponder] = React.useState(false);
-  //const [openModalRespuesta, setOpenModalRespuesta] = React.useState(false);
 
   const setTaskMessageAndTitle = (id, newTitulo, newMensaje) => {
     const messagesUpdated = messages.map((message) => {
@@ -73,11 +69,6 @@ export const AppContextWrapper = (props) => {
           titulo: newTitulo,
           texto: newMensaje,
         };
-        /** 
-        const foroWebRef = doc(firebaseDb, "ForoWeb", id);
-        setDoc(foroWebRef, { text: newMessage }, { merge: true });
-        return { ...message, text: newMessage };
-        */
       }
       return message;
     });
@@ -105,28 +96,26 @@ export const AppContextWrapper = (props) => {
     setMessages(updateAnswer);
   };
 
-  const addMessage =(elTitulo, mensaje) => {
+  const addMessage = (elTitulo, mensaje) => {
+    let date_ob = new Date();
+    let date = ("0" + date_ob.getDate()).slice(-2);
+    let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+    let year = date_ob.getFullYear();
+    let hours = date_ob.getHours();
+    let minutes = date_ob.getMinutes();
+
     const newMensaje = {
-      id:uuidv4(), 
-      idUser:"2", 
-      titulo:elTitulo,  
-      fecha:"El dia de hoy", 
-      hechoPor:"Fabian Portilla",
+      id: uuidv4(),
+      idUser: "2",
+      titulo: elTitulo,
+      fecha: date + "/" + month + "/" + year + " " + hours + ":" + minutes,
+      hechoPor: "Fabian Portilla",
       texto: mensaje,
-      respuestas:[],
-    
-    }
+      respuestas: [],
+    };
     const messageUpdated = [...messages, newMensaje];
     setMessages(messageUpdated);
-  }
-
-  /**
-
-  const openModalResponder = () => {
-    setMoldalResponder(true);
   };
-  const closeModalResponder = () => setMoldalResponder(false);
-   */
 
   const state = {
     messages,

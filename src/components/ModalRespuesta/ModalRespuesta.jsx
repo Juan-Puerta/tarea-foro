@@ -16,11 +16,13 @@ const ModalRespuesta = ({ id, visible, cerrarModal }) => {
 
   const handleClose = () => {
     cerrarModal();
+    setTextRespuesta("");
   };
 
   const enviarRespuesta = () => {
     cerrarModal();
     state.addAnswer(id, textRespuesta);
+    setTextRespuesta("");
   };
 
   return (

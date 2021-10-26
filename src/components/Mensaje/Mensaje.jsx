@@ -38,24 +38,6 @@ const Mensaje = ({ id, titulo, usuario, fecha, textMensaje, respuestas }) => {
     setOpenModalRespuesta(false);
   };
 
-  /** 
-  const cambiarStatus = (event) => {
-    const status = event.target.checked;
-    state.setMessageStatus(textMensaje.id, status);
-  };
-  */
-
-  /** 
-  const cambiarMensaje = () => {
-    //setIsUpdating(false);
-    state.setMessageText(textMensaje.id, text);
-  };
-
-  const openModalResponder = () => {
-    state.openModalResponder();
-  };
-  */
-
   return (
     <div className="mensaje">
       <Card className="card" sx={{ maxWidth: 345 }}>
