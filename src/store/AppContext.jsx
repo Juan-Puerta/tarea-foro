@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
+//import {getCurrentDate} from 'utils'
 //import firebase from "../config/firebase";
 //import { getFirestore, doc, setDoc, deleteDoc } from "firebase/firestore";
 
 const AppContext = React.createContext();
+
 
 export const AppContextWrapper = (props) => {
   const mensajesArray = [
@@ -103,6 +105,21 @@ export const AppContextWrapper = (props) => {
     setMessages(updateAnswer);
   };
 
+  const addMessage =(elTitulo, mensaje) => {
+    const newMensaje = {
+      id:uuidv4(), 
+      idUser:"2", 
+      titulo:elTitulo,  
+      fecha:"El dia de hoy", 
+      hechoPor:"Fabian Portilla",
+      texto: mensaje,
+      respuestas:[],
+    
+    }
+    const messageUpdated = [...messages, newMensaje];
+    setMessages(messageUpdated);
+  }
+
   /**
 
   const openModalResponder = () => {
@@ -114,6 +131,7 @@ export const AppContextWrapper = (props) => {
   const state = {
     messages,
     setMessages,
+    addMessage,
     setTaskMessageAndTitle,
     deleteMessage,
     addAnswer,
