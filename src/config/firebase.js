@@ -1,24 +1,30 @@
-// Import the functions you need from the SDKs you need
+//import firebase from "firebase/app";
 import { initializeApp } from "firebase/app";
+import { getFirestore, collection, getDocs } from 'firebase/firestore/lite';
+import 'firebase/auth';
 import 'firebase/firestore'
-//import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+//import firebase from "firebase/app";
+//require("firebase/firestore"); 
+
+
 const firebaseConfig = {
   apiKey: "AIzaSyA_gkDAgxlTbgFSwDhnH85WBY-5M18RdWY",
   authDomain: "foroweb-df8be.firebaseapp.com",
   projectId: "foroweb-df8be",
   storageBucket: "foroweb-df8be.appspot.com",
   messagingSenderId: "661721816658",
-  appId: "1:661721816658:web:5a5787be2ea834e99e898b",
-  measurementId: "G-HX3HNS6BT9"
+  appId: "1:661721816658:web:6e2692aaf6e811599e898b",
+  measurementId: "G-R646T17P5E"
 };
+
 
 // Initialize Firebase
 const firebase = initializeApp(firebaseConfig);
+//const auth = firebase.auth();
+//firebase.initializeApp(firebaseConfig); 
+//var db = firebase.firestore
 
-export default firebase;
-//const analytics = getAnalytics(app);
+ //export const auth = firebase.auth()
+//export const firestore = firebase.firestore 
+export default firebase
