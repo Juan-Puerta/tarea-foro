@@ -8,3 +8,9 @@
   font-weight: bold;
   text-align: center;
 }
+
+.appBar
+  .css-hip9hq-MuiPaper-root-MuiAppBar-root
+  .css-1juivf6-MuiTypography-root {
+  text-align: left;
+}

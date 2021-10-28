@@ -2,9 +2,7 @@ import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import {
   getFirestore,
-  collection,
   doc,
-  getDocs,
   setDoc,
   deleteDoc,
   arrayUnion,
@@ -22,20 +20,6 @@ export const AppContextWrapper = (props) => {
   const [userName, setUserName] = useState("");
   const [userEmail, setUserEmail] = useState("");
   const [userPassword, setUserPassword] = useState("");
-
-  const uploadMessages = async () => {
-    const messagesUpload = [];
-    //const firebaseDb = getFirestore(firebase);
-    const response = await getDocs(collection(firebaseDb, "messages"));
-    response.forEach((message) => {
-      messagesUpload.push(message.data());
-    });
-    setMessages(messagesUpload);
-  };
-
-  React.useEffect(() => {
-    uploadMessages();
-  }, []);
 
   //Está completo
   const setTaskMessageAndTitle = (id, newTitulo, newMensaje) => {
@@ -73,14 +57,9 @@ export const AppContextWrapper = (props) => {
 
   //Está completo
   const addAnswer = (id, textoRespuesta) => {
-    const nuevaRespuesta = {
-      idRespuesta: uuidv4(),
-      idMensaje: id,
-      textoR: textoRespuesta,
-    };
     const updateAnswer = messages.map((mensaje) => {
       if (mensaje.id === id) {
-        mensaje.respuestas.push(nuevaRespuesta);
+        mensaje.respuestas.push(textoRespuesta);
       }
       return mensaje;
     });

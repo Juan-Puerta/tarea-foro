@@ -23,10 +23,17 @@ export default function ButtonAppBar() {
     <Box sx={{ flexGrow: 1 }} className="appBar">
       <AppBar position="static">
         <Toolbar>
+          <Typography
+            className="userTab"
+            variant="h6"
+            component="span"
+            sx={{ flexGrow: 1 }}
+          >
+            {state.userName}
+          </Typography>
           <Typography variant="h6" component="span" sx={{ flexGrow: 1 }}>
             AnonymousChan
           </Typography>
-
           <IconButton
             size="large"
             edge="start"
