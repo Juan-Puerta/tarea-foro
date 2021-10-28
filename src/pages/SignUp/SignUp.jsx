@@ -10,11 +10,12 @@ import "./SignUp.css";
 import firebase from '../../config/firebase';
 import { getFirestore, collection, getDocs } from 'firebase/firestore/lite';
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import {addUser} from '../../config/firebase';
 //import {auth} from '../../config/firebase';
 
 
 
-const SignUp = () => {
+const SignUp = (props) => {
 
   
   const [name, setName] = useState("");
@@ -27,7 +28,13 @@ const SignUp = () => {
   const onEmailChange = (event) => {setEmail(event.target.value)}
   const onPasswordChange = (event) => {setPassword(event.target.value)}
 
-  const onSingUp = (e) => {
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    addUser(email, password);
+    props.history.push("/");
+}
+
+  /* const onSingUp = (e) => {
     e.preventDefault()
     console.log("signUp")
     console.log(name, email, password)
@@ -45,7 +52,9 @@ const SignUp = () => {
       // ..
     });
     
-  }
+  } */
+
+
 
   return (
     <div className="signUp">
@@ -89,7 +98,7 @@ const SignUp = () => {
                 divider={<Divider orientation="vertical" flexItem />}
                 spacing={2}
               >
-                <Button variant="contained" onClick={onSingUp}>Ingresar</Button>
+                <Button variant="contained" onClick={handleSubmit}>Ingresar</Button>
                 <Button variant="contained">Cancelar</Button>
               </Stack>
             </div>
