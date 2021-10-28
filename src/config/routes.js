@@ -7,8 +7,8 @@ const routing = (
   <Router>
     <Switch>
       <Route exact path="/" component={Home} />
-      <Route path="/login" component={Login} />
-      <Route path="/signUp" component={SignUp} />
+      <Route exact path="/login" component={Login} />
+      <Route exact path="/signUp" component={SignUp} />
     </Switch>
   </Router>
 );

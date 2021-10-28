@@ -1,66 +1,43 @@
 import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-//import {getCurrentDate} from 'utils'
-//import firebase from "../config/firebase";
-//import { getFirestore, doc, setDoc, deleteDoc } from "firebase/firestore";
+import {
+  getFirestore,
+  collection,
+  doc,
+  getDocs,
+  setDoc,
+  deleteDoc,
+  arrayUnion,
+  arrayRemove,
+} from "firebase/firestore";
+import firebase from "../config/firebase";
 
 const AppContext = React.createContext();
 
 export const AppContextWrapper = (props) => {
-  const mensajesArray = [
-    {
-      id: "1m",
-      idUser: "1",
-      titulo: "Me gusta la caca",
-      fecha: "21/10/2021",
-      hechoPor: "Juan Puerta",
-      texto: "El que lo lea es gay",
-      respuestas: [
-        { idRespuesta: "1r", idMensaje: "1m", textoR: "Interesante" },
-        { idRespuesta: "2r", idMensaje: "1m", textoR: "No me cuentes tu vida" },
-      ],
-    },
-    {
-      id: "2m",
-      idUser: "1",
-      titulo: "¿Cómo hackeo Facebook?",
-      fecha: "12/6/2021",
-      hechoPor: "Juan Puerta",
-      texto: "Quiero hackear el facebook de mi novia",
-      respuestas: [
-        {
-          idRespuesta: "1r2",
-          idMensaje: "2m",
-          textoR: "Para que quieres saber eso",
-        },
-        { idRespuesta: "2r2", idMensaje: "2m", textoR: "No tengo novia" },
-        { idRespuesta: "3r2", idMensaje: "2m", textoR: "Estás enfermo amigo" },
-      ],
-    },
-    {
-      id: "3m",
-      idUser: "2",
-      titulo: "¿Cómo salir del platanal?",
-      fecha: "11/02/2020",
-      hechoPor: "Fabián Portilla",
-      texto: "No sé como salir de este platanal que se va a quemar",
-      respuestas: [
-        {
-          idRespuesta: "1r3",
-          idMensaje: "3m",
-          textoR: "Hay que luchar por el país",
-        },
-        {
-          idRespuesta: "2r3",
-          idMensaje: "3m",
-          textoR: "¿Cómo pongo una respuesta?",
-        },
-      ],
-    },
-  ];
+  const firebaseDb = getFirestore(firebase);
 
-  const [messages, setMessages] = useState(mensajesArray);
+  const [messages, setMessages] = useState([]);
 
+  const [userName, setUserName] = useState("");
+  const [userEmail, setUserEmail] = useState("");
+  const [userPassword, setUserPassword] = useState("");
+
+  const uploadMessages = async () => {
+    const messagesUpload = [];
+    //const firebaseDb = getFirestore(firebase);
+    const response = await getDocs(collection(firebaseDb, "messages"));
+    response.forEach((message) => {
+      messagesUpload.push(message.data());
+    });
+    setMessages(messagesUpload);
+  };
+
+  React.useEffect(() => {
+    uploadMessages();
+  }, []);
+
+  //Está completo
   const setTaskMessageAndTitle = (id, newTitulo, newMensaje) => {
     const messagesUpdated = messages.map((message) => {
       if (message.id === id) {
@@ -73,13 +50,28 @@ export const AppContextWrapper = (props) => {
       return message;
     });
     setMessages(messagesUpdated);
+    try {
+      const messageRef = doc(firebaseDb, "messages", id);
+      setDoc(
+        messageRef,
+        { texto: newMensaje, titulo: newTitulo },
+        { merge: true }
+      );
+    } catch (e) {
+      console.error("Error adding document: ", e);
+    }
   };
 
-  const deleteMessage = (id) => {
+  //Está completo
+  const deleteMessage = async (id) => {
     const newMessages = messages.filter((mensaje) => mensaje.id !== id);
     setMessages(newMessages);
+    await deleteDoc(doc(firebaseDb, "messages", id));
+    const userRef = doc(firebaseDb, "users", userEmail);
+    setDoc(userRef, { messages: arrayRemove(id) }, { merge: true });
   };
 
+  //Está completo
   const addAnswer = (id, textoRespuesta) => {
     const nuevaRespuesta = {
       idRespuesta: uuidv4(),
@@ -94,8 +86,15 @@ export const AppContextWrapper = (props) => {
     });
 
     setMessages(updateAnswer);
+    const messageRef = doc(firebaseDb, "messages", id);
+    setDoc(
+      messageRef,
+      { respuestas: arrayUnion(textoRespuesta) },
+      { merge: true }
+    );
   };
 
+  //Está completo
   const addMessage = (elTitulo, mensaje) => {
     let date_ob = new Date();
     let date = ("0" + date_ob.getDate()).slice(-2);
@@ -106,15 +105,45 @@ export const AppContextWrapper = (props) => {
 
     const newMensaje = {
       id: uuidv4(),
-      idUser: "2",
+      idUser: userEmail,
       titulo: elTitulo,
       fecha: date + "/" + month + "/" + year + " " + hours + ":" + minutes,
-      hechoPor: "Fabian Portilla",
+      hechoPor: userName,
       texto: mensaje,
       respuestas: [],
     };
     const messageUpdated = [...messages, newMensaje];
     setMessages(messageUpdated);
+    try {
+      setDoc(doc(firebaseDb, "messages", newMensaje.id), newMensaje);
+
+      const userRef = doc(firebaseDb, "users", userEmail);
+      setDoc(userRef, { messages: arrayUnion(newMensaje.id) }, { merge: true });
+    } catch (e) {
+      console.error("Error adding document: ", e);
+    }
+  };
+
+  //Está completo
+  const addUser = () => {
+    const newUser = {
+      userName: userName,
+      userEmail: userEmail,
+      userPassword: userPassword,
+      messages: [],
+    };
+    try {
+      setDoc(doc(firebaseDb, "users", newUser.userEmail), newUser);
+    } catch (e) {
+      console.error("Error adding document: ", e);
+    }
+  };
+
+  //Está completo
+  const logOutAppUser = () => {
+    setUserName("");
+    setUserEmail("");
+    setUserPassword("");
   };
 
   const state = {
@@ -124,6 +153,14 @@ export const AppContextWrapper = (props) => {
     setTaskMessageAndTitle,
     deleteMessage,
     addAnswer,
+    userName,
+    setUserName,
+    userEmail,
+    setUserEmail,
+    userPassword,
+    setUserPassword,
+    addUser,
+    logOutAppUser,
   };
 
   return (

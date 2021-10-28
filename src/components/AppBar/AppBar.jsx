@@ -1,4 +1,6 @@
 import * as React from "react";
+import AppContext from "../../store/AppContext";
+import { useHistory } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -8,6 +10,15 @@ import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import "./AppBar.css";
 
 export default function ButtonAppBar() {
+  const history = useHistory();
+
+  const state = React.useContext(AppContext);
+
+  const logOut = () => {
+    state.logOutAppUser();
+    history.push("/login");
+  };
+
   return (
     <Box sx={{ flexGrow: 1 }} className="appBar">
       <AppBar position="static">
@@ -22,6 +33,7 @@ export default function ButtonAppBar() {
             color="inherit"
             aria-label="menu"
             sx={{ mr: 2 }}
+            onClick={logOut}
           >
             <ExitToAppIcon></ExitToAppIcon>
           </IconButton>

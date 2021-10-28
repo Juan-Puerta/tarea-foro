@@ -27,7 +27,7 @@ const Mensaje = ({ id, titulo, usuario, fecha, textMensaje, respuestas }) => {
 
   const cambiarTituloAndTexto = () => {
     setIsUpdating(false);
-    state.setTaskMessageAndTitle(id, title, textMensaje);
+    state.setTaskMessageAndTitle(id, title, textoMensa);
   };
 
   const abrirModalRespuestas = () => {
