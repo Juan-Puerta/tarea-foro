@@ -15,8 +15,12 @@ export default function ButtonAppBar() {
   const state = React.useContext(AppContext);
 
   const logOut = () => {
-    state.logOutAppUser();
-    history.push("/login");
+    try {
+      state.logoutUser();
+      history.push("/");
+    } catch (error) {
+      console.error("Error: ", error);
+    }
   };
 
   return (

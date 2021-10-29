@@ -1,13 +1,32 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
+import AppContext from "../../store/AppContext";
 
 import "./Login.css";
 
 const Login = () => {
+  const history = useHistory();
+
+  const state = React.useContext(AppContext);
+
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    try {
+      state.loginUser(email, password);
+      history.push("/home");
+    } catch (error) {
+      console.log("error: " + error);
+    }
+  };
+
   return (
     <div className="login">
       <Card className="carDispo" sx={{ minWidth: 275 }}>
@@ -18,11 +37,15 @@ const Login = () => {
           </div>
           <hr />
           <div className="formContainer">
-            <div>Nombre de usuario</div>
-            <TextField 
-            id="filled-required" 
-            label="Usuario" 
-            variant="filled" 
+            <div>Email</div>
+            <TextField
+              id="filled-required"
+              label="Email"
+              variant="filled"
+              value={email}
+              onChange={(event) => {
+                setEmail(event.target.value);
+              }}
             />
             <div>Contraseña</div>
             <TextField
@@ -31,14 +54,27 @@ const Login = () => {
               type="password"
               autoComplete="current-password"
               variant="filled"
+              value={password}
+              onChange={(event) => {
+                setPassword(event.target.value);
+              }}
             />
             <div>
-              <Button variant="contained">Ingresar</Button>
+              <Button variant="contained" onClick={handleSubmit}>
+                Ingresar
+              </Button>
             </div>
           </div>
         </CardContent>
         <CardActions>
-          <Button size="small">Registrarse</Button>
+          <Button
+            size="small"
+            onClick={() => {
+              history.push("/signUp");
+            }}
+          >
+            Registrarse
+          </Button>
         </CardActions>
       </Card>
     </div>

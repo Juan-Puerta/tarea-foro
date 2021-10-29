@@ -7,14 +7,7 @@ import TextField from "@mui/material/TextField";
 import Divider from "@mui/material/Divider";
 import Stack from "@mui/material/Stack";
 import AppContext from "../../store/AppContext";
-//import { v4 as uuidv4 } from "uuid";
 import "./SignUp.css";
-//import db from "../../config/firebase"
-//import firebase from '../../config/firebase';
-//import { getFirestore, collection, getDocs } from 'firebase/firestore/lite';
-//import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-//import { addUser } from "../../config/firebase";
-//import {auth} from '../../config/firebase';
 
 const SignUp = (props) => {
   const history = useHistory();
@@ -22,35 +15,28 @@ const SignUp = (props) => {
   const state = React.useContext(AppContext);
 
   const [correctEmail, setCorrectEmail] = React.useState(false);
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const [name, setName] = React.useState("");
 
-  const onNameChange = (event) => {
-    state.setUserName(event.target.value);
-  };
   const onEmailChange = (event) => {
     let re =
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
+    setEmail(event.target.value);
     if (re.test(event.target.value)) {
-      state.setUserEmail(event.target.value);
       setCorrectEmail(true);
     } else {
-      state.setUserEmail(event.target.value);
       setCorrectEmail(false);
     }
   };
-  const onPasswordChange = (event) => {
-    state.setUserPassword(event.target.value);
-  };
 
-  const handleSubmit = () => {
-    if (
-      state.userEmail !== "" &&
-      state.userName !== "" &&
-      state.userPassword !== ""
-    ) {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (email !== "" && name !== "" && password !== "") {
       if (correctEmail === true) {
-        state.addUser();
-        history.push("/");
+        state.registerUser(name, email, password);
+        history.push("/home");
       } else {
         alert("El email no es valido");
       }
@@ -72,19 +58,17 @@ const SignUp = (props) => {
             <div>Nombre completo</div>
             <TextField
               required
-              //id="filled-required"
-              label="Usuario"
+              label="Nombre"
               variant="filled"
-              value={state.userName}
-              onChange={onNameChange}
+              value={name}
+              onChange={(event) => setName(event.target.value)}
             />
             <div>Correo electronico</div>
             <TextField
               required
-              //id="filled-required"
               label="Correo"
               variant="filled"
-              value={state.userEmail}
+              value={email}
               onChange={onEmailChange}
             />
             <div>Contraseña</div>
@@ -95,8 +79,8 @@ const SignUp = (props) => {
               type="password"
               autoComplete="current-password"
               variant="filled"
-              value={state.userPassword}
-              onChange={onPasswordChange}
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
             />
             <div className="divBotones">
               <Stack
@@ -107,7 +91,14 @@ const SignUp = (props) => {
                 <Button variant="contained" onClick={handleSubmit}>
                   Ingresar
                 </Button>
-                <Button variant="contained">Cancelar</Button>
+                <Button
+                  variant="contained"
+                  onClick={() => {
+                    history.push("/");
+                  }}
+                >
+                  Cancelar
+                </Button>
               </Stack>
             </div>
           </div>

@@ -45,34 +45,37 @@ const Mensaje = ({ id, titulo, usuario, fecha, textMensaje, respuestas }) => {
           <Button variant="contained" onClick={abrirModalRespuestas}>
             Responder
           </Button>
-          {isUpdating ? (
-            <IconButton
-              color="primary"
-              onClick={() => {
-                setIsUpdating(cambiarTituloAndTexto);
-              }}
-              //disabled={!text.length}
-            >
-              <SaveIcon />
-            </IconButton>
+          {usuario === state.user?.email ? (
+            <div>
+              {isUpdating ? (
+                <IconButton
+                  color="primary"
+                  onClick={() => {
+                    setIsUpdating(cambiarTituloAndTexto);
+                  }}
+                >
+                  <SaveIcon />
+                </IconButton>
+              ) : (
+                <IconButton
+                  color="primary"
+                  onClick={() => {
+                    setIsUpdating(true);
+                  }}
+                >
+                  <EditIcon />
+                </IconButton>
+              )}
+              <IconButton
+                color="primary"
+                onClick={() => state.deleteMessage(id)}
+              >
+                <DeleteForeverIcon />
+              </IconButton>
+            </div>
           ) : (
-            <IconButton
-              color="primary"
-              onClick={() => {
-                setIsUpdating(true);
-              }}
-              //disabled={!text.length}
-            >
-              <EditIcon />
-            </IconButton>
+            <div />
           )}
-          <IconButton
-            color="primary"
-            onClick={() => state.deleteMessage(id)}
-            //disabled={!text.length}
-          >
-            <DeleteForeverIcon />
-          </IconButton>
         </CardActions>
         {isUpdating ? (
           <CardContent className="cardContent">
