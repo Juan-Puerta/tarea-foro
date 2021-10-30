@@ -8,6 +8,8 @@ import Divider from "@mui/material/Divider";
 import Stack from "@mui/material/Stack";
 import AppContext from "../../store/AppContext";
 import "./SignUp.css";
+//aqui se importa el cifrado y se llama en el metodo
+import md5 from 'md5'
 
 const SignUp = (props) => {
   const history = useHistory();
@@ -33,9 +35,10 @@ const SignUp = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    
     if (email !== "" && name !== "" && password !== "") {
       if (correctEmail === true) {
-        state.registerUser(name, email, password);
+        state.registerUser(name, email, md5(password));
         history.push("/home");
       } else {
         alert("El email no es valido");

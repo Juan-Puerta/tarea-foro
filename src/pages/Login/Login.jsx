@@ -6,6 +6,7 @@ import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import AppContext from "../../store/AppContext";
+import md5 from 'md5'
 
 import "./Login.css";
 
@@ -20,7 +21,7 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     try {
-      state.loginUser(email, password);
+      state.loginUser(email, md5(password));
       history.push("/home");
     } catch (error) {
       console.log("error: " + error);
