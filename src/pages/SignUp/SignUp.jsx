@@ -1,5 +1,9 @@
 import React from "react";
+import md5 from "md5";
+import Alerta from "../../components/Alerta/Alerta";
 import { useHistory } from "react-router-dom";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../config/firebase";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
@@ -8,10 +12,8 @@ import Divider from "@mui/material/Divider";
 import Stack from "@mui/material/Stack";
 import AppContext from "../../store/AppContext";
 import "./SignUp.css";
-//aqui se importa el cifrado y se llama en el metodo
-import md5 from 'md5'
 
-const SignUp = (props) => {
+const SignUp = () => {
   const history = useHistory();
 
   const state = React.useContext(AppContext);
@@ -33,18 +35,18 @@ const SignUp = (props) => {
     }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    
+  const handleSubmit = async () => {
     if (email !== "" && name !== "" && password !== "") {
       if (correctEmail === true) {
-        state.registerUser(name, email, md5(password));
+        const passwordEncrypt = md5(password);
+        await createUserWithEmailAndPassword(auth, email, passwordEncrypt);
+        state.registerUser(name, email, passwordEncrypt);
         history.push("/home");
       } else {
-        alert("El email no es valido");
+        setCorrectEmail(true);
       }
     } else {
-      alert("Por favor rellene todos los campos");
+      setCorrectEmail(true);
     }
   };
 
@@ -66,6 +68,7 @@ const SignUp = (props) => {
               value={name}
               onChange={(event) => setName(event.target.value)}
             />
+            <p />
             <div>Correo electronico</div>
             <TextField
               required
@@ -74,6 +77,7 @@ const SignUp = (props) => {
               value={email}
               onChange={onEmailChange}
             />
+            <p />
             <div>Contraseña</div>
             <TextField
               required
@@ -85,6 +89,7 @@ const SignUp = (props) => {
               value={password}
               onChange={(event) => setPassword(event.target.value)}
             />
+            <p />
             <div className="divBotones">
               <Stack
                 direction="row"
@@ -106,6 +111,12 @@ const SignUp = (props) => {
             </div>
           </div>
         </CardContent>
+        {correctEmail && (
+          <Alerta
+            tipo="error"
+            mensaje="Correo incorrecto o contraseña demasiado corta"
+          />
+        )}
       </Card>
     </div>
   );

@@ -1,13 +1,15 @@
 import React from "react";
+import md5 from "md5";
+import Alerta from "../../components/Alerta/Alerta";
 import { useHistory } from "react-router-dom";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../config/firebase";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import AppContext from "../../store/AppContext";
-import md5 from 'md5'
-
 import "./Login.css";
 
 const Login = () => {
@@ -17,14 +19,17 @@ const Login = () => {
 
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const [error, setError] = React.useState(false);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
     try {
-      state.loginUser(email, md5(password));
+      const passwordEncrypt = md5(password);
+      await signInWithEmailAndPassword(auth, email, passwordEncrypt);
+      state.loginUser(email, passwordEncrypt);
       history.push("/home");
     } catch (error) {
-      console.log("error: " + error);
+      setError(true);
+      console.log("" + error);
     }
   };
 
@@ -48,6 +53,7 @@ const Login = () => {
                 setEmail(event.target.value);
               }}
             />
+            <p />
             <div>Contraseña</div>
             <TextField
               id="filled-password-input"
@@ -60,6 +66,7 @@ const Login = () => {
                 setPassword(event.target.value);
               }}
             />
+            <p />
             <div>
               <Button variant="contained" onClick={handleSubmit}>
                 Ingresar
@@ -77,6 +84,7 @@ const Login = () => {
             Registrarse
           </Button>
         </CardActions>
+        {error && <Alerta tipo="error" mensaje="Credenciales Incorrectas" />}
       </Card>
     </div>
   );

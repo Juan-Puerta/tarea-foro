@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
+import { auth } from "../config/firebase";
 import {
   collection,
   getFirestore,
@@ -11,14 +12,8 @@ import {
   arrayUnion,
   arrayRemove,
 } from "firebase/firestore";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 import firebase from "../config/firebase";
-import { auth } from "../config/firebase";
-import {
-  createUserWithEmailAndPassword,
-  onAuthStateChanged,
-  signOut,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
 
 const AppContext = React.createContext();
 
@@ -116,7 +111,13 @@ export const AppContextWrapper = (props) => {
     }
   };
 
-  const registerUser = async (name, email, password) => {
+  const cambiarUserName = (newName) => {
+    setUserName(newName);
+    const userRef = doc(firebaseDb, "users", user.email);
+    setDoc(userRef, { name: newName }, { merge: true });
+  };
+
+  const registerUser = (name, email, password) => {
     setUserName(name);
     const newUser = {
       name: name,
@@ -125,7 +126,6 @@ export const AppContextWrapper = (props) => {
       messages: [],
     };
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
       setDoc(doc(firebaseDb, "users", newUser.email), newUser);
     } catch (error) {
       console.log(error.message);
@@ -133,7 +133,6 @@ export const AppContextWrapper = (props) => {
   };
   const loginUser = async (email, password) => {
     try {
-      await signInWithEmailAndPassword(auth, email, password);
       const docRef = doc(firebaseDb, "users", email);
       const docSnap = await getDoc(docRef);
       const theName = docSnap.data().name;
@@ -157,13 +156,14 @@ export const AppContextWrapper = (props) => {
 
   const state = {
     messages,
+    userName,
+    user,
     setMessages,
     addMessage,
     setTaskMessageAndTitle,
     deleteMessage,
     addAnswer,
-    userName,
-    user,
+    cambiarUserName,
     registerUser,
     loginUser,
     logoutUser,

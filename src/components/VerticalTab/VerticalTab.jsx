@@ -5,7 +5,7 @@ import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Foro from "../../pages/Foro/Foro";
-import Buscar from "../../pages/Buscar/Buscar";
+import Editar from "../../pages/Editar/Editar";
 import "./VerticalTab.css";
 
 function TabPanel(props) {
@@ -58,14 +58,14 @@ export default function BasicTabs() {
             aria-label="basic tabs example"
           >
             <Tab label="Discutir" {...a11yProps(0)} />
-            <Tab label="Buscar" {...a11yProps(1)} />
+            <Tab label="Editar" {...a11yProps(1)} />
           </Tabs>
         </Box>
         <TabPanel value={value} index={0}>
           <Foro></Foro>
         </TabPanel>
         <TabPanel value={value} index={1}>
-          <Buscar></Buscar>
+          <Editar></Editar>
         </TabPanel>
       </Box>
     </div>

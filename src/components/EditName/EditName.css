@@ -1,0 +1,23 @@
+.editName {
+  margin: 1%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.editName .css-bhp9pd-MuiPaper-root-MuiCard-root {
+  width: 80%;
+}
+
+.editName
+  .css-bhp9pd-MuiPaper-root-MuiCard-root
+  .css-46bh2p-MuiCardContent-root {
+  text-align: center;
+}
+
+.editName
+  .css-bhp9pd-MuiPaper-root-MuiCard-root
+  .css-46bh2p-MuiCardContent-root
+  .css-1u3bzj6-MuiFormControl-root-MuiTextField-root {
+  width: 90%;
+}

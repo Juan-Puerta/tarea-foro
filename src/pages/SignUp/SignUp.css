@@ -1,8 +1,12 @@
 .signUp {
-  margin: 9%;
+  margin: 5%;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.signUp .css-pwngrv-MuiPaper-root-MuiCard-root {
+  min-width: 400px;
 }
 
 .cabeseraSignUp {
