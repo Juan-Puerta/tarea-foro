@@ -1,20 +1,20 @@
 {
   "files": {
     "main.css": "/tarea-foro/static/css/main.0dbdef65.chunk.css",
-    "main.js": "/tarea-foro/static/js/main.5ec68f11.chunk.js",
-    "main.js.map": "/tarea-foro/static/js/main.5ec68f11.chunk.js.map",
+    "main.js": "/tarea-foro/static/js/main.b6fbe709.chunk.js",
+    "main.js.map": "/tarea-foro/static/js/main.b6fbe709.chunk.js.map",
     "runtime-main.js": "/tarea-foro/static/js/runtime-main.7fd30e48.js",
     "runtime-main.js.map": "/tarea-foro/static/js/runtime-main.7fd30e48.js.map",
-    "static/js/2.2a1d5a9c.chunk.js": "/tarea-foro/static/js/2.2a1d5a9c.chunk.js",
-    "static/js/2.2a1d5a9c.chunk.js.map": "/tarea-foro/static/js/2.2a1d5a9c.chunk.js.map",
+    "static/js/2.8cea5aa4.chunk.js": "/tarea-foro/static/js/2.8cea5aa4.chunk.js",
+    "static/js/2.8cea5aa4.chunk.js.map": "/tarea-foro/static/js/2.8cea5aa4.chunk.js.map",
     "index.html": "/tarea-foro/index.html",
     "static/css/main.0dbdef65.chunk.css.map": "/tarea-foro/static/css/main.0dbdef65.chunk.css.map",
-    "static/js/2.2a1d5a9c.chunk.js.LICENSE.txt": "/tarea-foro/static/js/2.2a1d5a9c.chunk.js.LICENSE.txt"
+    "static/js/2.8cea5aa4.chunk.js.LICENSE.txt": "/tarea-foro/static/js/2.8cea5aa4.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.7fd30e48.js",
-    "static/js/2.2a1d5a9c.chunk.js",
+    "static/js/2.8cea5aa4.chunk.js",
     "static/css/main.0dbdef65.chunk.css",
-    "static/js/main.5ec68f11.chunk.js"
+    "static/js/main.b6fbe709.chunk.js"
   ]
 }
