@@ -17,7 +17,7 @@ export default function ButtonAppBar() {
   const logOut = () => {
     try {
       state.logoutUser();
-      history.push("/");
+      history.push("/tarea-foro");
     } catch (error) {
       console.error("Error: ", error);
     }

@@ -43,7 +43,7 @@ const SignUp = () => {
           const passwordEncrypt = md5(password);
           await createUserWithEmailAndPassword(auth, email, passwordEncrypt);
           state.registerUser(name, email, passwordEncrypt);
-          history.push("/home");
+          history.push("/tarea-foro/home");
         } else {
           setCorrectEmail(true);
           setError(true);
@@ -109,7 +109,7 @@ const SignUp = () => {
                 <Button
                   variant="contained"
                   onClick={() => {
-                    history.push("/");
+                    history.push("/tarea-foro");
                   }}
                 >
                   Cancelar

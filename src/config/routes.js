@@ -6,9 +6,9 @@ import SignUp from "../pages/SignUp/SignUp";
 const routing = (
   <Router>
     <Switch>
-      <Route exact path="/home" component={Home} />
-      <Route exact path="/" component={Login} />
-      <Route exact path="/signUp" component={SignUp} />
+      <Route exact path="/tarea-foro/home" component={Home} />
+      <Route exact path="/tarea-foro" component={Login} />
+      <Route exact path="/tarea-foro/signUp" component={SignUp} />
     </Switch>
   </Router>
 );

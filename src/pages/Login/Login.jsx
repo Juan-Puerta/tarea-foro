@@ -26,7 +26,7 @@ const Login = () => {
       const passwordEncrypt = md5(password);
       await signInWithEmailAndPassword(auth, email, passwordEncrypt);
       state.loginUser(email, passwordEncrypt);
-      history.push("/home");
+      history.push("/tarea-foro/home");
     } catch (e) {
       setError(true);
     }
@@ -77,7 +77,7 @@ const Login = () => {
           <Button
             size="small"
             onClick={() => {
-              history.push("/signUp");
+              history.push("/tarea-foro/signUp");
             }}
           >
             Registrarse
