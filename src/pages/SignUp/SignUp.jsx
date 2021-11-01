@@ -18,10 +18,11 @@ const SignUp = () => {
 
   const state = React.useContext(AppContext);
 
-  const [correctEmail, setCorrectEmail] = React.useState(false);
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [name, setName] = React.useState("");
+  const [correctEmail, setCorrectEmail] = React.useState(false);
+  const [error, setError] = React.useState(false);
 
   const onEmailChange = (event) => {
     let re =
@@ -36,17 +37,23 @@ const SignUp = () => {
   };
 
   const handleSubmit = async () => {
-    if (email !== "" && name !== "" && password !== "") {
-      if (correctEmail === true) {
-        const passwordEncrypt = md5(password);
-        await createUserWithEmailAndPassword(auth, email, passwordEncrypt);
-        state.registerUser(name, email, passwordEncrypt);
-        history.push("/home");
+    try {
+      if (email !== "" && name !== "" && password !== "") {
+        if (correctEmail === true) {
+          const passwordEncrypt = md5(password);
+          await createUserWithEmailAndPassword(auth, email, passwordEncrypt);
+          state.registerUser(name, email, passwordEncrypt);
+          history.push("/home");
+        } else {
+          setCorrectEmail(true);
+          setError(true);
+        }
       } else {
         setCorrectEmail(true);
+        setError(true);
       }
-    } else {
-      setCorrectEmail(true);
+    } catch (e) {
+      setError(true);
     }
   };
 
@@ -111,10 +118,10 @@ const SignUp = () => {
             </div>
           </div>
         </CardContent>
-        {correctEmail && (
+        {error && (
           <Alerta
             tipo="error"
-            mensaje="Correo incorrecto o contraseña demasiado corta"
+            mensaje="Correo incorrecto o contraseña invalida"
           />
         )}
       </Card>

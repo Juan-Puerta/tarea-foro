@@ -27,9 +27,8 @@ const Login = () => {
       await signInWithEmailAndPassword(auth, email, passwordEncrypt);
       state.loginUser(email, passwordEncrypt);
       history.push("/home");
-    } catch (error) {
+    } catch (e) {
       setError(true);
-      console.log("" + error);
     }
   };
 
