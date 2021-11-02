@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/tarea-foro/static/css/main.0dbdef65.chunk.css",
-    "main.js": "/tarea-foro/static/js/main.daad43d2.chunk.js",
-    "main.js.map": "/tarea-foro/static/js/main.daad43d2.chunk.js.map",
+    "main.js": "/tarea-foro/static/js/main.179f2bde.chunk.js",
+    "main.js.map": "/tarea-foro/static/js/main.179f2bde.chunk.js.map",
     "runtime-main.js": "/tarea-foro/static/js/runtime-main.7fd30e48.js",
     "runtime-main.js.map": "/tarea-foro/static/js/runtime-main.7fd30e48.js.map",
     "static/js/2.f437b629.chunk.js": "/tarea-foro/static/js/2.f437b629.chunk.js",
@@ -15,6 +15,6 @@
     "static/js/runtime-main.7fd30e48.js",
     "static/js/2.f437b629.chunk.js",
     "static/css/main.0dbdef65.chunk.css",
-    "static/js/main.daad43d2.chunk.js"
+    "static/js/main.179f2bde.chunk.js"
   ]
 }
